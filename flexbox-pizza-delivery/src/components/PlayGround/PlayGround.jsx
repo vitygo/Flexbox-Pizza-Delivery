@@ -7,6 +7,7 @@ export default function PlayGround({ userInput, currentChallenge,setCurrentLevel
 
 
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isGreen, setIsGreen] = useState(false)
 
     useEffect(() => {
 
@@ -16,15 +17,26 @@ export default function PlayGround({ userInput, currentChallenge,setCurrentLevel
             const correct = areObjectsEqual(parsedUserInput, parsedCorrectAnswer);
             if (correct) {
                 setIsCorrect(true);
-                setCurrentLevel(prev => prev + 1);
-                setUserInput('dispaly: flex;');
-                console.log(currentLevel)
-                
+                setIsGreen(true)
+
+             
+           
 
                 }
 
         }
     }, [userInput, currentChallenge]);
+
+
+    function handleNextLevel(){
+        if (isCorrect){
+            setCurrentLevel(prev => prev + 1);
+            setUserInput('dispaly: flex;');
+            setIsGreen(false)
+            setIsCorrect(false)
+        }
+  
+    }
 
    
     const userStyles = parseCSS(userInput);
@@ -43,11 +55,13 @@ export default function PlayGround({ userInput, currentChallenge,setCurrentLevel
             </div>
         </section>
         
-        <section className="target-playground-container" style={targetStyles}>
+        <section className={`target-playground-container ${isGreen ? 'green' : ''}`} style={targetStyles}>
             <div className="playground-container__target">
                 <img src='./flat.png' className="target__img" alt='target img'/>
             </div>
         </section>
+
+        {isCorrect && <button className='next-lvl-btn'onClick={() => handleNextLevel()}>next</button>}
         
   
         </>

@@ -5,15 +5,26 @@
  * @param {string} cssString The raw CSS string from the user input.
  * @returns {object} An object with cleaned property-value pairs.
  */
+/**
+ * Parses a CSS-like string into a JavaScript object of properties and values.
+ * This is resilient to different property order, extra whitespace, and case.
+ *
+ * @param {string} cssString The raw CSS string from the user input.
+ * @returns {object} An object with cleaned property-value pairs.
+ */
 export const parseCSS = (cssString) => {
     const declarations = cssString.split(';').filter(item => item.trim() !== '');
     const parsedObject = {};
     declarations.forEach(declaration => {
         const parts = declaration.split(':');
         if (parts.length === 2) {
-            const property = parts[0].trim().toLowerCase();
-            const value = parts[1].trim().toLowerCase().replace(/['"]/g, '');
-            parsedObject[property] = value;
+            const property = parts[0].trim();
+            const value = parts[1].trim().replace(/['"]/g, '');
+
+            // Ключова зміна: конвертація в camelCase
+            const camelCaseProperty = property.replace(/-(\w)/g, (_, char) => char.toUpperCase());
+
+            parsedObject[camelCaseProperty] = value;
         }
     });
     return parsedObject;
@@ -22,6 +33,8 @@ export const parseCSS = (cssString) => {
 /**
  * Compares two objects to see if they are equal (ignoring key order).
  *
+/**
+ * Compares two objects for deep equality.
  * @param {object} obj1 The first object to compare.
  * @param {object} obj2 The second object to compare.
  * @returns {boolean} True if the objects are equal, false otherwise.
@@ -35,7 +48,12 @@ export const areObjectsEqual = (obj1, obj2) => {
     }
 
     for (const key of keys1) {
-        if (obj1[key] !== obj2[key]) {
+        if (!obj2.hasOwnProperty(key)) {
+            return false;
+        }
+        const val1 = String(obj1[key]).trim().toLowerCase();
+        const val2 = String(obj2[key]).trim().toLowerCase();
+        if (val1 !== val2) {
             return false;
         }
     }

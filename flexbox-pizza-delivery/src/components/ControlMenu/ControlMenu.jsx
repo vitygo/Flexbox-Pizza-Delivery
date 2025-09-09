@@ -27,7 +27,7 @@ export default function({setUserInput, userInput}){
                             <li>5</li>
                         </ul>
                     </div>
-                    <textarea className='body__code-input' rows="5" onChange={(e) => setUserInput(e.target.value)}/>
+                    <textarea  value={userInput} className='body__code-input' rows="5" onChange={(e) => setUserInput(e.target.value)}/>
                 </div>
             </div>
 

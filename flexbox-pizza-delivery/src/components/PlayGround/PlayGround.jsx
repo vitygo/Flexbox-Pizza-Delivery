@@ -1,33 +1,46 @@
-import './PlayGround.css'
-import React, {useState,  useEffect} from 'react'
-import { parseCSS, areObjectsEqual } from '../../utils' // Import the utility functions
+import './PlayGround.css';
+import React from 'react';
 
-export default function PlayGround({ userInput, currentChallenge }){
-    
-    // Use isCorrect, not trueInput
-    const [isCorrect, setIsCorrect] = useState(false);
+export default function PlayGround({ userInput , currentChalange}) {
 
-    useEffect(() => {
-        // Only run if a challenge is provided
-        if (!currentChallenge) {
-            return;
-        }
+    // Функція для парсингу CSS-рядка в JS-об'єкт
+    const parseCSS = (cssString) => {
+        const declarations = cssString.split(';').filter(item => item.trim() !== '');
+        const parsedObject = {};
+        declarations.forEach(declaration => {
+            const parts = declaration.split(':');
+            if (parts.length === 2) {
+                const property = parts[0].trim();
+                const value = parts[1].trim().replace(/['"]/g, '');
+                // Конвертуємо властивості з дефісами в camelCase для React
+                const camelCaseProperty = property.replace(/-(\w)/g, (_, char) => char.toUpperCase());
+                parsedObject[camelCaseProperty] = value;
+            }
+        });
+        return parsedObject;
+    };
 
-        const parsedUserInput = parseCSS(userInput);
-        const parsedCorrectAnswer = parseCSS(currentChallenge.correctAnswer);
-
-        setIsCorrect(areObjectsEqual(parsedUserInput, parsedCorrectAnswer));
-
-    }, [userInput, currentChallenge]); // Add currentChallenge to the dependency array
+    // Перетворюємо введений код користувача в об'єкт стилів
+    const userStyles = parseCSS(userInput);
 
     return(
-        <section className={`playground-container ${isCorrect ? currentChallenge.cssClass : ''}`}>
+        <>
+        <section 
+            className="playground-container" 
+            style={userStyles} // Застосовуємо стилі безпосередньо тут
+        >
             <div className="playground-container__delivery-guy">
                 <img src='./delivery-guy.png' className="delivery-guy__img" alt='delivery guy'/>
             </div>
-            <div className="playground-container__delivery-guy">
-                <img src='./delivery-guy.png' className="delivery-guy__img" alt='delivery guy'/>
-            </div>
+
         </section>
-    )
+        <section className="target-playground-container">
+            <div className="playground-container__target">
+            <img src='./flat.png' className="target__img" alt='target img'/>
+            </div>
+
+        </section>
+        </>
+        
+    );
 }

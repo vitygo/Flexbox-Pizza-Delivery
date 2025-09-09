@@ -3,11 +3,25 @@
     background: rgb(234, 234, 234);
     height: 900px;
     width: 900px;
-    display: flex; 
-    justify-content: flex-start;
     box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-    margin: 0px 20px 10px 0px;    
+    margin: 0px 0px 10px 0px;    
     border-radius: 10px;
+
+}
+
+.target-playground-container{
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    background: rgba(10, 123, 12, 0.191);
+    height: 900px;
+    width: 839px;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    margin: 0px 0px 10px 0px;    
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+
 
 }
 
@@ -47,15 +61,34 @@
 
 .playground-container__delivery-guy{
     position: relative;
-    z-index: 2;
+    z-index: 3;
     height: 150px;
     width: 150px;
  
 
 
+
+}
+
+.playground-container__target{
+    position: relative;
+    z-index: 1;
+    height: 150px;
+    width: 150px;
+}
+
+.target__img{
+    z-index: 1;
+    height: 150px;
+    width: auto;
+    transform: scale(1);
+    animation: pulse 2s infinite;
+
 }
 
 .delivery-guy__img{
+    position: relative;
+    z-index: 3;
     width: 150px;
     height: auto;
     transform: scale(1);

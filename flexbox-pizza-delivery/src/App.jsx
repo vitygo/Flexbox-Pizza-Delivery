@@ -4,7 +4,7 @@ import ControlMenu from "./components/ControlMenu/ControlMenu"
 import { challenges } from './chalanges'; // Import the challenge data
 
 function App() {
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState('display: flex;');
   const [currentLevel, setCurrentLevel] = useState(0); // State for the current level
 
   
@@ -25,7 +25,7 @@ function App() {
     <ControlMenu setUserInput={setUserInput} userInput={userInput}/>
     {/* Pass the currentChallenge as a prop */}
     <PlayGround userInput={userInput} currentChallenge={currentChallenge}/>
-    <button onClick={() => setCurrentLevel(prev => prev + 1)}>next-level</button>
+    {/* <button onClick={() => setCurrentLevel(prev => prev + 1)}>next-level</button> */}
     
     </main>
     </>

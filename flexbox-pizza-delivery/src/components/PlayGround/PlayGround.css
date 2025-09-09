@@ -17,6 +17,30 @@
    
 }
 
+.playground-container.true-f-flex-start{
+    display: flex;
+    justify-content: flex-start;
+   
+}
+
+.playground-container.true-f-end{
+    display: flex;
+    justify-content: flex-end;
+   
+}
+
+.playground-container.true-a-center{
+    display: flex;
+    align-items: center;
+
+}
+
+.playground-container.true-f-direction-column-f-end{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 
 
 

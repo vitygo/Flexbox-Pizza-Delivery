@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { parseCSS, areObjectsEqual } from '../../utils'; 
 
 
-export default function PlayGround({ userInput, currentChallenge }) {
+export default function PlayGround({ userInput, currentChallenge,setCurrentLevel,currentLevel,setUserInput}) {
 
 
     const [isCorrect, setIsCorrect] = useState(false);
@@ -13,8 +13,15 @@ export default function PlayGround({ userInput, currentChallenge }) {
         if (currentChallenge) {
             const parsedUserInput = parseCSS(userInput);
             const parsedCorrectAnswer = parseCSS(currentChallenge.correctAnswer);
-            setIsCorrect(areObjectsEqual(parsedUserInput, parsedCorrectAnswer));
-            console.log(isCorrect)
+            const correct = areObjectsEqual(parsedUserInput, parsedCorrectAnswer);
+            if (correct) {
+                setIsCorrect(true);
+                setCurrentLevel(prev => prev + 1);
+                setUserInput('dispaly: flex;');
+                console.log(currentLevel)
+                
+
+                }
 
         }
     }, [userInput, currentChallenge]);
@@ -42,7 +49,7 @@ export default function PlayGround({ userInput, currentChallenge }) {
             </div>
         </section>
         
-        {isCorrect && console.log(isCorrect)}
+  
         </>
     );
 }

@@ -6,23 +6,23 @@ export const challenges = [
   },
   {
     level: 2,
-    correctAnswer: "justify-content: flex-end;",
+    correctAnswer: "display: flex; justify-content: center;",
     targetPosition: "justify-content: center;"
   },
   {
     level: 3,
-    correctAnswer: "justify-content: space-between;",
+    correctAnswer: "display: flex; justify-content: flex-end;",
     targetPosition: "justify-content: flex-end;"
   },
   {
     level: 4,
-    correctAnswer: "align-items: center;",
+    correctAnswer: "display: flex; justify-content: center;",
     targetPosition: "justify-content: center;"
   },
   {
     level: 5,
-    correctAnswer: "align-items: flex-end;",
-    targetPosition: "align-items: center;"
+    correctAnswer: "display: flex; align-items: flex-end;",
+    targetPosition: "align-items: flex-end;"
   },
   {
     level: 6,

@@ -2,7 +2,7 @@ import "./ControlMenu.css"
 import React, {useState} from 'react'
 
 
-export default function({setUserInput, userInput}){
+export default function({setUserInput, userInput,currentLevel}){
 
    
 
@@ -13,7 +13,7 @@ export default function({setUserInput, userInput}){
     return(
         <section className="control-menu">
             <div className="control-menu__header">
-                <h2 className='header__title'>FLEXBOX PIZZA DELIVERY</h2>
+                <h2 className='header__title'>FLEXBOX PIZZA DELIVERY{currentLevel+1}</h2>
             </div>
             <div className="control-menu__body">
                 <div className="body__text"></div>
